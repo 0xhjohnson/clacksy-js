@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useUser } from '@supabase/supabase-auth-helpers/react'
-import useSignOut from '../hooks/useSignOut'
+import useSignOut from '@/hooks/useSignOut'
 
 const Home: NextPage = () => {
   const { user, error: userError } = useUser()

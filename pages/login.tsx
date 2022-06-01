@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
-import LoginForm from '../components/registration/LoginForm'
-import Header from '../components/registration/Header'
-import useLogin from '../hooks/useLogin'
+import LoginForm from '@/components/registration/LoginForm'
+import Header from '@/components/registration/Header'
+import useLogin from '@/hooks/useLogin'
 
 export default function Login() {
   const [email, setEmail] = useState('')
