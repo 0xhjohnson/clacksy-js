@@ -1,7 +1,29 @@
+import { ChangeEvent, FormEvent, useState } from 'react'
 import LoginForm from '../components/registration/LoginForm'
 import Header from '../components/registration/Header'
+import useLogin from '../hooks/useLogin'
 
 export default function Login() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const loginMutation = useLogin({
+    email,
+    password,
+  })
+
+  function handleEmailChange(e: ChangeEvent<HTMLInputElement>) {
+    setEmail(e.target.value)
+  }
+
+  function handlePasswordChange(e: ChangeEvent<HTMLInputElement>) {
+    setPassword(e.target.value)
+  }
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    loginMutation.mutate()
+  }
+
   return (
     <div className="min-h-full flex">
       <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
@@ -11,7 +33,12 @@ export default function Login() {
             subtitle={{ text: 'sign up for free account', href: '/signup' }}
           />
           <div className="mt-8">
-            <LoginForm />
+            <LoginForm
+              handleSubmit={handleSubmit}
+              handleEmailChange={handleEmailChange}
+              handlePasswordChange={handlePasswordChange}
+              submitButtonText="Sign in"
+            />
           </div>
         </div>
       </div>
