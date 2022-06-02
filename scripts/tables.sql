@@ -25,7 +25,7 @@ create policy "Pronoun options are viewable by everyone."
  * profiles
  */
 create table profiles (
-  profile_id uuid references auth.users not null,
+  profile_id uuid references auth.users on delete cascade not null,
   name text,
   username text,
   pronoun_id uuid references pronouns,
