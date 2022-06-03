@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import Header from '@/components/registration/Header'
+import Header from '@/components/auth/Header'
 
 describe('Header', () => {
   it('renders with heading', () => {
