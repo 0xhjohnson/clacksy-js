@@ -15,12 +15,6 @@ values
   ('Ze/hir/hir', 4),
   ('Name only', 5);
 
-alter table pronouns enable row level security;
-
-create policy "Pronoun options are viewable by everyone."
-  on pronouns for select
-  using ( true );
-
 /*
  * profiles
  */
@@ -35,16 +29,25 @@ create table profiles (
   constraint username_format check (username ~ '^[a-z_0-9]+$')
 );
 
-alter table profiles enable row level security;
+/*
+ * sound_tests
+ */
+create table sound_tests (
+  sound_test_id uuid primary key default uuid_generate_v4(),
+  url text not null,
+  uploaded timestamptz not null,
+  last_updated timestamptz default now(),
+  owner_id uuid references auth.users on delete cascade not null
+);
 
-create policy "Profiles are viewable by everyone."
-  on profiles for select
-  using ( true );
-
-create policy "Users can update own profile."
-  on profiles for update
-  using ( auth.uid() = profile_id );
-
-create policy "Users can delete own profile."
-  on profiles for delete
-  using ( auth.uid() = profile_id );
+/*
+ * votes
+ */
+create table votes (
+  sound_test_id uuid references sound_tests not null,
+  vote_type smallint default 0 not null,
+  timestamp timestamptz default now(),
+  owner_id uuid references auth.users not null,
+  primary key (sound_test_id, owner_id),
+  check(vote_type = -1 or vote_type = 0 or vote_type = 1)
+);
