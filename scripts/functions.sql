@@ -1,7 +1,7 @@
 create or replace function handle_new_user() 
 returns trigger as $$
 begin
-  insert into public.profiles (profile_id)
+  insert into public.user_profile (user_profile_id)
   values (new.id);
   return new;
 end;
