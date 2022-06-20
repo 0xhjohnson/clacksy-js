@@ -11,6 +11,7 @@
   "dependencies": {
     "@supabase/supabase-auth-helpers": "^1.4.2",
     "next": "latest",
+    "next-axiom": "^0.7.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-query": "^3.39.1"

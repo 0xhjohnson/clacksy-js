@@ -6,6 +6,8 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import type { AppProps } from 'next/app'
 import '@/styles/globals.css'
 
+export { reportWebVitals } from 'next-axiom'
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
 
