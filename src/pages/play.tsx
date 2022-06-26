@@ -22,7 +22,9 @@ export default function Play({
 }
 
 export async function getStaticProps() {
-  const currentDate = new Date().toLocaleDateString('en-US')
+  const currentDate = new Date().toLocaleDateString('en-US', {
+    timeZone: 'UTC',
+  })
   const soundTest = await getFeaturedSoundTest(currentDate)
 
   return {
