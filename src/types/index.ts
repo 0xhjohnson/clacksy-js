@@ -51,3 +51,20 @@ export type FeaturedSoundTestWithOptions = {
   featured_on: string
   options: FeaturedOptions
 }
+
+export const soundTestSortOptions = ['popular', 'latest'] as const
+export type SoundTestSort = typeof soundTestSortOptions[number]
+
+export type SoundTest = {
+  sound_test_id: string
+  url: string
+  uploaded: string
+  last_updated: string
+  username: string
+  total_votes: number
+  total_tests: number
+}
+
+export type SoundTestProps = {
+  soundTestInfo: SoundTest
+}
