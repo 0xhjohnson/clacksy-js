@@ -3,7 +3,7 @@ import { useUser } from '@supabase/supabase-auth-helpers/react'
 import { getUser } from '@supabase/supabase-auth-helpers/nextjs'
 import { SoundTest } from '@/components/SoundTest'
 import useSoundTests, { getSoundTests } from '@/hooks/useSoundTests'
-import { SoundTestSort, soundTestSortOptions } from '@/types'
+import { SoundTestSort, SOUND_TEST_SORT_OPTIONS } from '@/types'
 import { dehydrate, QueryClient } from 'react-query'
 import { GetServerSidePropsContext } from 'next'
 
@@ -46,7 +46,7 @@ export default function Vote() {
     <div>
       <h1>vote - vote for soundtest of the day</h1>
       <select value={sort} onChange={handleSortChange}>
-        {soundTestSortOptions.map((sort) => (
+        {SOUND_TEST_SORT_OPTIONS.map((sort) => (
           <option key={sort} value={sort}>
             {sort}
           </option>
