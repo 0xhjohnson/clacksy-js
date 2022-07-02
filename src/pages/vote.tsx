@@ -1,4 +1,6 @@
 import { ChangeEvent, useState } from 'react'
+import { useUser } from '@supabase/supabase-auth-helpers/react'
+import { getUser } from '@supabase/supabase-auth-helpers/nextjs'
 import { SoundTest } from '@/components/SoundTest'
 import useSoundTests, { getSoundTests } from '@/hooks/useSoundTests'
 import { SoundTestSort, soundTestSortOptions } from '@/types'
@@ -8,6 +10,7 @@ import { GetServerSidePropsContext } from 'next'
 export default function Vote() {
   const [page, setPage] = useState(0)
   const [sort, setSort] = useState<SoundTestSort>('latest')
+  const { user } = useUser()
 
   const {
     isLoading,
@@ -16,7 +19,7 @@ export default function Vote() {
     data: soundTests,
     isFetching,
     isPreviousData,
-  } = useSoundTests(sort, page)
+  } = useSoundTests(sort, page, user?.id)
 
   const currentPage = page + 1
   const soundTestsPerPage = 10
@@ -76,8 +79,10 @@ export default function Vote() {
   )
 }
 
-export async function getServerSideProps({ res }: GetServerSidePropsContext) {
-  res.setHeader(
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const { user } = await getUser(ctx)
+
+  ctx.res.setHeader(
     'Cache-Control',
     'public, s-maxage=10, stale-while-revalidate=60'
   )
@@ -93,7 +98,7 @@ export async function getServerSideProps({ res }: GetServerSidePropsContext) {
   const page = 0
 
   await queryClient.prefetchQuery(['soundTests', sort, page], () =>
-    getSoundTests(sort, page)
+    getSoundTests(sort, page, user?.id)
   )
 
   return {

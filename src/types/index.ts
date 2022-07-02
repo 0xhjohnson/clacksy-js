@@ -55,6 +55,13 @@ export type FeaturedSoundTestWithOptions = {
 export const soundTestSortOptions = ['popular', 'latest'] as const
 export type SoundTestSort = typeof soundTestSortOptions[number]
 
+export const VOTE_TYPES = {
+  Downvote: -1,
+  Default: 0,
+  Upvote: 1,
+} as const
+export type VoteType = typeof VOTE_TYPES[keyof typeof VOTE_TYPES]
+
 export type SoundTest = {
   sound_test_id: string
   url: string
@@ -63,8 +70,21 @@ export type SoundTest = {
   username: string
   total_votes: number
   total_tests: number
+  userVote?: VoteType
 }
 
 export type SoundTestProps = {
   soundTestInfo: SoundTest
+}
+
+export type VoteGroupProps = {
+  totalVotes: number
+  userVote?: VoteType
+}
+
+export type UserVote = {
+  sound_test_id: string
+  owner_id: string
+  vote_type: VoteType
+  created_at: string
 }

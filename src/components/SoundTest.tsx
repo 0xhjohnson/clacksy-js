@@ -1,13 +1,20 @@
 import useSoundTestAudio from '@/hooks/useSoundTestAudio'
 import { SoundTestProps } from '@/types'
+import VoteGroup from './VoteGroup'
 
 export function SoundTest({ soundTestInfo }: SoundTestProps) {
   const { data: soundTestAudio } = useSoundTestAudio(soundTestInfo.url)
 
   return (
-    <div>
+    <div className="p-4">
       <h2>sound test - {soundTestInfo.sound_test_id}</h2>
-      <pre>{JSON.stringify(soundTestInfo, null, 2)}</pre>
+      <div className="flex space-x-4 my-4">
+        <VoteGroup
+          totalVotes={soundTestInfo.total_votes}
+          userVote={soundTestInfo?.userVote}
+        />
+        <pre>{JSON.stringify(soundTestInfo, null, 2)}</pre>
+      </div>
       {soundTestAudio && (
         <audio controls>
           <source src={soundTestAudio} type="audio/x-m4a" />
