@@ -1,5 +1,6 @@
-import { useMutation } from 'react-query'
 import { supabaseClient } from '@supabase/supabase-auth-helpers/nextjs'
+import { useMutation } from 'react-query'
+
 import { UserInfo } from '@/types'
 
 async function login({ email, password }: UserInfo) {

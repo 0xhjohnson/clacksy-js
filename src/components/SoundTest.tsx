@@ -1,5 +1,6 @@
 import useSoundTestAudio from '@/hooks/useSoundTestAudio'
 import { SoundTestProps } from '@/types'
+
 import VoteGroup from './VoteGroup'
 
 export function SoundTest({ soundTestInfo }: SoundTestProps) {

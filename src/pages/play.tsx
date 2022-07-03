@@ -1,4 +1,5 @@
 import { InferGetStaticPropsType } from 'next'
+
 import useSoundTestAudio from '@/hooks/useSoundTestAudio'
 import { getFeaturedSoundTest } from '@/lib/getFeaturedSoundTest'
 

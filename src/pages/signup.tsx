@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
-import LoginForm from '@/components/auth/LoginForm'
+
 import Header from '@/components/auth/Header'
+import LoginForm from '@/components/auth/LoginForm'
 import useSignUp from '@/hooks/useSignUp'
 
 export default function Signup() {

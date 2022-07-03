@@ -1,10 +1,11 @@
-import { useState } from 'react'
-import clsx from 'clsx'
-import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/solid'
-import { VoteGroupProps, VOTE_TYPES, UpsertVote } from '@/types'
-import { upsertVote } from '@/lib/upsertVote'
+import { ChevronDownIcon,ChevronUpIcon } from '@heroicons/react/solid'
 import { useUser } from '@supabase/supabase-auth-helpers/react'
+import clsx from 'clsx'
+import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
+
+import { upsertVote } from '@/lib/upsertVote'
+import { UpsertVote,VOTE_TYPES, VoteGroupProps } from '@/types'
 
 const VARIANTS = {
   [VOTE_TYPES.Downvote]: 'text-gray-700 bg-gray-100 hover:bg-gray-200',

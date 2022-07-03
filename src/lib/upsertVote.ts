@@ -1,4 +1,5 @@
 import { supabaseClient } from '@supabase/supabase-auth-helpers/nextjs'
+
 import { UpsertVote } from '@/types'
 
 export async function upsertVote({

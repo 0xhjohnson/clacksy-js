@@ -1,6 +1,10 @@
 {
   "extends": "next/core-web-vitals",
-  "plugins": ["testing-library"],
+  "plugins": ["testing-library", "simple-import-sort"],
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  },
   "overrides": [
     {
       "files": [

@@ -1,11 +1,12 @@
-import { useState } from 'react'
-import { UserProvider } from '@supabase/supabase-auth-helpers/react'
+import '@/styles/globals.css'
+
 import { supabaseClient } from '@supabase/supabase-auth-helpers/nextjs'
+import { UserProvider } from '@supabase/supabase-auth-helpers/react'
+import type { AppProps } from 'next/app'
+import Head from 'next/head'
+import { useState } from 'react'
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import type { AppProps } from 'next/app'
-import '@/styles/globals.css'
-import Head from 'next/head'
 
 export { reportWebVitals } from 'next-axiom'
 

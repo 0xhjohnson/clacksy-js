@@ -1,5 +1,6 @@
-import { useQuery } from 'react-query'
 import { supabaseClient } from '@supabase/supabase-auth-helpers/nextjs'
+import { useQuery } from 'react-query'
+
 import { SoundTest, SoundTestSort, UserVote } from '@/types'
 
 export async function getSoundTests(

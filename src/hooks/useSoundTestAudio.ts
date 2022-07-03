@@ -1,5 +1,5 @@
-import { useQuery } from 'react-query'
 import { supabaseClient } from '@supabase/supabase-auth-helpers/nextjs'
+import { useQuery } from 'react-query'
 
 export async function getSoundTestAudio(fileUrl: string) {
   const [bucket, folder, filename] = fileUrl.split('/')
