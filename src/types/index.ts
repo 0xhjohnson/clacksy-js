@@ -80,6 +80,7 @@ export type SoundTestProps = {
 export type VoteGroupProps = {
   totalVotes: number
   userVote?: VoteType
+  soundTestId: SoundTest['sound_test_id']
 }
 
 export type UserVote = {
@@ -87,4 +88,10 @@ export type UserVote = {
   owner_id: string
   vote_type: VoteType
   created_at: string
+}
+
+export type UpsertVote = {
+  soundTestId: SoundTest['sound_test_id']
+  ownerId?: UserVote['owner_id'] | undefined
+  voteType: VoteType
 }

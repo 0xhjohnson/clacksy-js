@@ -12,6 +12,7 @@ export function SoundTest({ soundTestInfo }: SoundTestProps) {
         <VoteGroup
           totalVotes={soundTestInfo.total_votes}
           userVote={soundTestInfo?.userVote}
+          soundTestId={soundTestInfo.sound_test_id}
         />
         <pre>{JSON.stringify(soundTestInfo, null, 2)}</pre>
       </div>
