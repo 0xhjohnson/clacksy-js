@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export type UserInfo = {
   email: string
   password: string
@@ -58,7 +60,7 @@ export type SoundTestSort = typeof SOUND_TEST_SORT_OPTIONS[number]
 export const VOTE_TYPES = {
   Downvote: -1,
   Default: 0,
-  Upvote: 1,
+  Upvote: 1
 } as const
 export type VoteType = typeof VOTE_TYPES[keyof typeof VOTE_TYPES]
 
@@ -94,4 +96,42 @@ export type UpsertVote = {
   soundTestId: SoundTest['sound_test_id']
   ownerId?: UserVote['owner_id'] | undefined
   voteType: VoteType
+}
+
+export type ContainerProps = {
+  children: ReactNode
+}
+
+export type Keyboard = {
+  keyboard_id: string
+  name: string
+}
+
+export type KeyswitchType = {
+  name: string
+}
+
+export type Keyswitch = {
+  keyswitch_id: string
+  name: string
+  keyswitch_type: KeyswitchType
+}
+
+export type PlateMaterial = {
+  plate_material_id: string
+  name: string
+}
+
+export type UploadSoundTestAudio = {
+  audioFile: File
+  ownerId: string
+}
+
+export type AddSoundTest = {
+  fileLocation: string
+  userID: string
+  keyboard: string
+  plateMaterial: string
+  keycapMaterial: string
+  keyswitch: string
 }

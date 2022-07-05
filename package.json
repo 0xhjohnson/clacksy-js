@@ -9,6 +9,7 @@
     "test:ci": "jest --ci"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.5",
     "@heroicons/react": "^1.0.6",
     "@supabase/supabase-auth-helpers": "^1.4.2",
     "clsx": "^1.1.1",
@@ -16,7 +17,9 @@
     "next-axiom": "^0.7.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-query": "^3.39.1"
+    "react-hot-toast": "^2.2.0",
+    "react-query": "^3.39.1",
+    "use-debounce": "^8.0.1"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.2",

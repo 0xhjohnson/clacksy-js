@@ -5,6 +5,7 @@ import { UserProvider } from '@supabase/supabase-auth-helpers/react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useState } from 'react'
+import { Toaster } from 'react-hot-toast'
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Hydrate state={pageProps.dehydratedState}>
           <UserProvider supabaseClient={supabaseClient}>
             <Component {...pageProps} />
+            <Toaster />
             <ReactQueryDevtools />
           </UserProvider>
         </Hydrate>
