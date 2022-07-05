@@ -125,7 +125,7 @@ export default function New() {
         <div className="space-y-8 divide-y divide-gray-200">
           <div>
             <div>
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
+              <h3 className="text-lg font-medium leading-6 text-gray-900">
                 Sound test info
               </h3>
               <p className="mt-1 text-sm text-gray-500">
@@ -155,7 +155,7 @@ export default function New() {
                       aria-hidden="true"
                     />
                   </Combobox.Button>
-                  <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                  <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
                     {keyboards.map((keeb) => (
                       <Combobox.Option
                         key={keeb.keyboard_id}
@@ -221,7 +221,7 @@ export default function New() {
                       aria-hidden="true"
                     />
                   </Combobox.Button>
-                  <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                  <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
                     {switches.map((keyswitch) => (
                       <Combobox.Option
                         key={keyswitch.keyswitch_id}
@@ -286,7 +286,7 @@ export default function New() {
                     id="plate-material"
                     value={plateMaterial}
                     onChange={(e) => setPlateMaterial(e.target.value)}
-                    className="shadow-sm focus:ring-pink-500 focus:border-pink-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
                     required
                   >
                     {!plateMaterial && <option value="" disabled></option>}
@@ -314,7 +314,7 @@ export default function New() {
                     id="keycap-material"
                     value={keycapMaterial}
                     onChange={(e) => setKeycapMaterial(e.target.value)}
-                    className="shadow-sm focus:ring-pink-500 focus:border-pink-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
                     required
                   >
                     {!keycapMaterial && <option value="" disabled></option>}
@@ -337,12 +337,12 @@ export default function New() {
                 >
                   Sound test
                 </label>
-                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                   <div className="space-y-1 text-center">
                     <UploadIcon className="mx-auto h-10 w-10 text-gray-400" />
                     <label
                       htmlFor="audio-upload"
-                      className="relative cursor-pointer bg-white rounded-md font-medium text-sm text-pink-600 hover:text-pink-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-pink-500"
+                      className="relative cursor-pointer rounded-md bg-white text-sm font-medium text-pink-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-pink-500 focus-within:ring-offset-2 hover:text-pink-500"
                     >
                       <span>
                         {fileLocation
@@ -372,13 +372,13 @@ export default function New() {
           <div className="flex justify-end">
             <button
               type="button"
-              className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+              className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+              className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-pink-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
             >
               Save
             </button>

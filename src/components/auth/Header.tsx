@@ -13,7 +13,7 @@ type HeaderProps = {
 export default function Header({ title, subtitle }: HeaderProps) {
   return (
     <div>
-      <div className="h-8 w-8 bg-gray-300 rounded-full" />
+      <div className="h-8 w-8 rounded-full bg-gray-300" />
       <h2 className="mt-6 text-3xl font-extrabold text-gray-900">{title}</h2>
       <p className="mt-2 text-sm text-gray-600">
         Or{' '}

@@ -9,7 +9,7 @@ export function SoundTest({ soundTestInfo }: SoundTestProps) {
   return (
     <div className="p-4">
       <h2>sound test - {soundTestInfo.sound_test_id}</h2>
-      <div className="flex space-x-4 my-4">
+      <div className="my-4 flex space-x-4">
         <VoteGroup
           totalVotes={soundTestInfo.total_votes}
           userVote={soundTestInfo?.userVote}
