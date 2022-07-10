@@ -10,6 +10,9 @@ export type FeaturedSoundTest = {
   url: string
   uploaded: string
   owner_id: string
+  user_profile: {
+    username: string | null
+  }
   keyboard_id: string
   plate_material_id: string
   keycap_material_id: string
@@ -50,6 +53,9 @@ export type FeaturedSoundTestWithOptions = {
   url: string
   uploaded: string
   owner_id: string
+  user_profile: {
+    username: string | null
+  }
   featured_on: string
   options: FeaturedOptions
 }

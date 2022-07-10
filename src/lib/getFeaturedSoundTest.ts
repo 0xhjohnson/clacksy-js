@@ -79,6 +79,9 @@ async function getFeaturedSoundTestInfo(currentDate: string) {
     url,
     uploaded,
     owner_id,
+    user_profile (
+      username
+    ),
     keyboard_id,
     plate_material_id,
     keycap_material_id,
@@ -102,11 +105,16 @@ async function getFeaturedSoundTestInfo(currentDate: string) {
 export async function getFeaturedSoundTest(currentDate: string) {
   let soundTestWithOptions: FeaturedSoundTestWithOptions
 
-  // keyswitch_id, plate_material_id, and keyboard_id must be kept private since they correspond to the correct answers
+  // keyswitch_id, plate_material_id, keyboard_id, and keycap_material_id must be kept private since they correspond to the correct answers
   // they are only used for generating the options and should not be exposed to the client
   // safeSoundTestInfo represents "client safe" information
-  const { keyswitch_id, plate_material_id, keyboard_id, ...safeSoundTestInfo } =
-    await getFeaturedSoundTestInfo(currentDate)
+  const {
+    keyswitch_id,
+    plate_material_id,
+    keyboard_id,
+    keycap_material_id,
+    ...safeSoundTestInfo
+  } = await getFeaturedSoundTestInfo(currentDate)
 
   const [
     keycapMaterialOptions,
