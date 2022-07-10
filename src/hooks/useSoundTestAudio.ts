@@ -25,7 +25,7 @@ export default function useSoundTestAudio(fileUrl: string) {
     () => getSoundTestAudio(fileUrl),
     {
       staleTime: Infinity,
-      enabled: Boolean(fileUrl),
+      enabled: Boolean(fileUrl)
     }
   )
 }

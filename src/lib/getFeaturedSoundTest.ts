@@ -6,14 +6,14 @@ import {
   KeyboardOption,
   KeycapMaterial,
   KeyswitchOption,
-  PlateMaterialOption,
+  PlateMaterialOption
 } from '@/types'
 
 async function getKeyboardOptions(keyboardID: string) {
   const { data, error } = await supabaseClient.rpc<KeyboardOption>(
     'get_keyboard_options',
     {
-      correct_keyboard_id: keyboardID,
+      correct_keyboard_id: keyboardID
     }
   )
   if (error) {
@@ -28,7 +28,7 @@ async function getPlateMaterialOptions(plateMaterialID: string) {
   const { data, error } = await supabaseClient.rpc<PlateMaterialOption>(
     'get_plate_material_options',
     {
-      correct_plate_material_id: plateMaterialID,
+      correct_plate_material_id: plateMaterialID
     }
   )
   if (error) {
@@ -45,7 +45,7 @@ async function getKeyswitchOptions(keyswitchID: string) {
   const { data, error } = await supabaseClient.rpc<KeyswitchOption>(
     'get_keyswitch_options',
     {
-      correct_keyswitch_id: keyswitchID,
+      correct_keyswitch_id: keyswitchID
     }
   )
   if (error) {
@@ -120,12 +120,12 @@ export async function getFeaturedSoundTest(currentDate: string) {
     keycapMaterialOptions,
     keyswitchOptions,
     plateMaterialOptions,
-    keyboardOptions,
+    keyboardOptions
   ] = await Promise.all([
     getKeycapMaterialOptions(),
     getKeyswitchOptions(keyswitch_id),
     getPlateMaterialOptions(plate_material_id),
-    getKeyboardOptions(keyboard_id),
+    getKeyboardOptions(keyboard_id)
   ])
 
   soundTestWithOptions = {
@@ -134,8 +134,8 @@ export async function getFeaturedSoundTest(currentDate: string) {
       keycapMaterial: keycapMaterialOptions,
       keyswitch: keyswitchOptions,
       plateMaterial: plateMaterialOptions,
-      keyboard: keyboardOptions,
-    },
+      keyboard: keyboardOptions
+    }
   }
 
   return soundTestWithOptions

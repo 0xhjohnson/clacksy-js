@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+
 import Header from '@/components/auth/Header'
 
 describe('Header', () => {
@@ -9,7 +10,7 @@ describe('Header', () => {
     render(<Header title={title} subtitle={subtitle} />)
 
     const heading = screen.getByRole('heading', {
-      name: title,
+      name: title
     })
 
     expect(heading).toBeInTheDocument()
@@ -22,7 +23,7 @@ describe('Header', () => {
     render(<Header title={title} subtitle={subtitle} />)
 
     const subtitleLink = screen.getByRole('link', {
-      name: subtitle.text,
+      name: subtitle.text
     })
 
     expect(subtitleLink).toBeInTheDocument()

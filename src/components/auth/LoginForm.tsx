@@ -11,7 +11,7 @@ export default function LoginForm({
   handleSubmit,
   handleEmailChange,
   handlePasswordChange,
-  submitButtonText,
+  submitButtonText
 }: LoginFormProps) {
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>

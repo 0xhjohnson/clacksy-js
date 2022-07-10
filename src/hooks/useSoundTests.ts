@@ -13,7 +13,7 @@ export async function getSoundTests(
 
   const { data: soundTests, error: soundTestsError } =
     await supabaseClient.rpc<SoundTest>(rpcHandler, {
-      page,
+      page
     })
   if (soundTestsError) {
     throw soundTestsError
@@ -56,7 +56,7 @@ export default function useSoundTests(
     ['soundTests', sort, page, userId],
     () => getSoundTests(sort, page, userId),
     {
-      keepPreviousData: true,
+      keepPreviousData: true
     }
   )
 }

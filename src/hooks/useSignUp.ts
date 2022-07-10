@@ -6,7 +6,7 @@ import { UserInfo } from '@/types'
 async function signUp({ email, password }: UserInfo) {
   const { user, error: signUpError } = await supabaseClient.auth.signUp({
     email: email,
-    password: password,
+    password: password
   })
   if (signUpError) {
     throw signUpError

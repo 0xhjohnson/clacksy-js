@@ -1,22 +1,22 @@
-import { ChevronDownIcon,ChevronUpIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid'
 import { useUser } from '@supabase/supabase-auth-helpers/react'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 
 import { upsertVote } from '@/lib/upsertVote'
-import { UpsertVote,VOTE_TYPES, VoteGroupProps } from '@/types'
+import { UpsertVote, VOTE_TYPES, VoteGroupProps } from '@/types'
 
 const VARIANTS = {
   [VOTE_TYPES.Downvote]: 'text-gray-700 bg-gray-100 hover:bg-gray-200',
   [VOTE_TYPES.Default]: 'text-gray-500 hover:bg-gray-50',
-  [VOTE_TYPES.Upvote]: 'text-pink-700 bg-pink-100 hover:bg-pink-200',
+  [VOTE_TYPES.Upvote]: 'text-pink-700 bg-pink-100 hover:bg-pink-200'
 }
 
 export default function VoteGroup({
   totalVotes,
   userVote = 0,
-  soundTestId,
+  soundTestId
 }: VoteGroupProps) {
   const { user } = useUser()
   const [vote, setVote] = useState(userVote)
@@ -27,7 +27,7 @@ export default function VoteGroup({
     {
       onSuccess: () => {
         queryClient.invalidateQueries('soundTests')
-      },
+      }
     }
   )
 
@@ -38,7 +38,7 @@ export default function VoteGroup({
     voteMutation.mutate({
       soundTestId,
       ownerId: user?.id,
-      voteType: newVote,
+      voteType: newVote
     })
   }
 
@@ -49,7 +49,7 @@ export default function VoteGroup({
     voteMutation.mutate({
       soundTestId,
       ownerId: user?.id,
-      voteType: newVote,
+      voteType: newVote
     })
   }
 

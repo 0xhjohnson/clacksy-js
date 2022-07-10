@@ -9,7 +9,7 @@ export default function Signup() {
   const [password, setPassword] = useState('')
   const signUpMutation = useSignUp({
     email,
-    password,
+    password
   })
 
   function handleEmailChange(e: ChangeEvent<HTMLInputElement>) {

@@ -8,7 +8,7 @@ import useSoundTestAudio from '@/hooks/useSoundTestAudio'
 import { getFeaturedSoundTest } from '@/lib/getFeaturedSoundTest'
 
 export default function Play({
-  soundTest,
+  soundTest
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { data: soundTestAudio } = useSoundTestAudio(soundTest.url)
 
@@ -22,7 +22,7 @@ export default function Play({
   const uploadDateFormatted = new Date(soundTest.uploaded).toLocaleDateString(
     undefined,
     {
-      dateStyle: 'long',
+      dateStyle: 'long'
     }
   )
 
@@ -31,7 +31,7 @@ export default function Play({
       keycapMaterial,
       plateMaterial,
       keyboard,
-      keyswitch,
+      keyswitch
     })
   }
 
@@ -250,14 +250,14 @@ export default function Play({
 
 export async function getStaticProps() {
   const currentDate = new Date().toLocaleDateString('en-US', {
-    timeZone: 'UTC',
+    timeZone: 'UTC'
   })
   const soundTest = await getFeaturedSoundTest(currentDate)
 
   return {
     props: {
-      soundTest,
+      soundTest
     },
-    revalidate: 5 * 60,
+    revalidate: 5 * 60
   }
 }

@@ -13,6 +13,6 @@ export default function useSignOut() {
   const queryClient = useQueryClient()
 
   return useMutation(signOut, {
-    onSuccess: () => queryClient.removeQueries(),
+    onSuccess: () => queryClient.removeQueries()
   })
 }

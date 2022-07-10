@@ -6,7 +6,7 @@ import { dehydrate, QueryClient } from 'react-query'
 
 import { SoundTest } from '@/components/SoundTest'
 import useSoundTests, { getSoundTests } from '@/hooks/useSoundTests'
-import { SOUND_TEST_SORT_OPTIONS,SoundTestSort } from '@/types'
+import { SOUND_TEST_SORT_OPTIONS, SoundTestSort } from '@/types'
 
 export default function Vote() {
   const [page, setPage] = useState(0)
@@ -19,7 +19,7 @@ export default function Vote() {
     error,
     data: soundTests,
     isFetching,
-    isPreviousData,
+    isPreviousData
   } = useSoundTests(sort, page, user?.id)
 
   const currentPage = page + 1
@@ -91,9 +91,9 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        cacheTime: 60,
-      },
-    },
+        cacheTime: 60
+      }
+    }
   })
   const sort: SoundTestSort = 'latest'
   const page = 0
@@ -104,7 +104,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
-    },
+      dehydratedState: dehydrate(queryClient)
+    }
   }
 }

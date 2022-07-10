@@ -9,7 +9,7 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const loginMutation = useLogin({
     email,
-    password,
+    password
   })
 
   function handleEmailChange(e: ChangeEvent<HTMLInputElement>) {
