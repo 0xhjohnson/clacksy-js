@@ -1,4 +1,4 @@
-import { useUser } from '@supabase/supabase-auth-helpers/react'
+import { useUser } from '@supabase/auth-helpers-react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'

@@ -1,4 +1,4 @@
-import { supabaseClient } from '@supabase/supabase-auth-helpers/nextjs'
+import { supabaseClient } from '@supabase/auth-helpers-nextjs'
 import { useQuery } from 'react-query'
 
 import { Keyboard } from '@/types'

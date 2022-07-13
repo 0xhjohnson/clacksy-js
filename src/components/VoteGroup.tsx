@@ -1,5 +1,5 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid'
-import { useUser } from '@supabase/supabase-auth-helpers/react'
+import { useUser } from '@supabase/auth-helpers-react'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'

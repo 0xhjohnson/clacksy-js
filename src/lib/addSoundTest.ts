@@ -1,4 +1,4 @@
-import { supabaseClient } from '@supabase/supabase-auth-helpers/nextjs'
+import { supabaseClient } from '@supabase/auth-helpers-nextjs'
 
 import { AddSoundTest } from '@/types'
 

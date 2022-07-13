@@ -27,6 +27,8 @@ export default function Play({
   )
 
   function handleSave() {
+    // need to validate the answers
+    // this should be done server-side for safety
     console.log({
       keycapMaterial,
       plateMaterial,

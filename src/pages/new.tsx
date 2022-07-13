@@ -1,7 +1,7 @@
 import { Combobox } from '@headlessui/react'
 import { UploadIcon } from '@heroicons/react/outline'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-import { useUser } from '@supabase/supabase-auth-helpers/react'
+import { useUser } from '@supabase/auth-helpers-react'
 import clsx from 'clsx'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import toast from 'react-hot-toast'

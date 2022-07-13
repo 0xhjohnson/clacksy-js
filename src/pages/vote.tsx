@@ -1,5 +1,5 @@
-import { getUser } from '@supabase/supabase-auth-helpers/nextjs'
-import { useUser } from '@supabase/supabase-auth-helpers/react'
+import { getUser } from '@supabase/auth-helpers-nextjs'
+import { useUser } from '@supabase/auth-helpers-react'
 import { GetServerSidePropsContext } from 'next'
 import { ChangeEvent, useState } from 'react'
 import { dehydrate, QueryClient } from 'react-query'
