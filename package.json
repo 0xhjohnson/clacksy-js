@@ -21,6 +21,7 @@
     "react-dom": "18.1.0",
     "react-hot-toast": "^2.2.0",
     "react-query": "^3.39.1",
+    "tiny-invariant": "^1.2.0",
     "use-debounce": "^8.0.1"
   },
   "devDependencies": {

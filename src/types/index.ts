@@ -5,7 +5,14 @@ export type UserInfo = {
   password: string
 }
 
-export type FeaturedSoundTest = {
+export type PrivateSoundTestInfo = {
+  keyboard_id: string
+  plate_material_id: string
+  keycap_material_id: string
+  keyswitch_id: string
+}
+
+export interface FeaturedSoundTest extends PrivateSoundTestInfo {
   sound_test_id: string
   url: string
   uploaded: string
@@ -140,4 +147,24 @@ export type AddSoundTest = {
   plateMaterial: string
   keycapMaterial: string
   keyswitch: string
+}
+
+export type ValidateAnswer = {
+  keyboard: string
+  plateMaterial: string
+  keycapMaterial: string
+  keyswitch: string
+}
+
+export type CheckAnswer = {
+  isCorrect: boolean
+  correctAnswer: string
+}
+
+export type ValidateAnswerResponse = {
+  keyboard_id: CheckAnswer | null
+  plate_material_id: CheckAnswer | null
+  keycap_material_id: CheckAnswer | null
+  keyswitch_id: CheckAnswer | null
+  totalPoints: number
 }

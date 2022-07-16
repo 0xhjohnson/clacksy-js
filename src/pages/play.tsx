@@ -1,16 +1,32 @@
 import { RadioGroup } from '@headlessui/react'
+import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
 import clsx from 'clsx'
 import { InferGetStaticPropsType } from 'next'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
+import toast from 'react-hot-toast'
+import { useMutation } from 'react-query'
 
 import Container from '@/components/Container'
 import useSoundTestAudio from '@/hooks/useSoundTestAudio'
 import { getFeaturedSoundTest } from '@/lib/getFeaturedSoundTest'
+import { validateAnswer } from '@/lib/validateAnswer'
+import { ValidateAnswer, ValidateAnswerResponse } from '@/types'
 
 export default function Play({
   soundTest
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { data: soundTestAudio } = useSoundTestAudio(soundTest.url)
+  const [gradedAnswers, setGradedAnswers] = useState<ValidateAnswerResponse>()
+
+  const validateAnswerMutation = useMutation(
+    (answer: ValidateAnswer) => validateAnswer(answer),
+    {
+      onSuccess: (data: ValidateAnswerResponse) => {
+        toast.success('gg thanks for playing')
+        setGradedAnswers(data)
+      }
+    }
+  )
 
   const [keycapMaterial, setKeycapMaterial] = useState<string>()
   const [keyswitch, setKeyswitch] = useState<string>()
@@ -26,10 +42,14 @@ export default function Play({
     }
   )
 
-  function handleSave() {
-    // need to validate the answers
-    // this should be done server-side for safety
-    console.log({
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    if (!keycapMaterial || !plateMaterial || !keyboard || !keyswitch) {
+      return toast.error('save error: missing required information')
+    }
+
+    validateAnswerMutation.mutate({
       keycapMaterial,
       plateMaterial,
       keyboard,
@@ -55,13 +75,32 @@ export default function Play({
           Your browser does not support the audio tag.
         </audio>
       )}
-      <div className="mt-8 space-y-8">
+      <form className="mt-8 space-y-8" onSubmit={handleSubmit}>
         <div>
-          <h2 className="text-sm font-medium text-gray-900">KEYCAP MATERIAL</h2>
+          <div className="flex justify-between">
+            <h2 className="text-sm font-medium text-gray-900">
+              KEYCAP MATERIAL
+            </h2>
+            <div
+              className={clsx(
+                gradedAnswers?.keycap_material_id ? 'inline' : 'hidden'
+              )}
+            >
+              {gradedAnswers?.keycap_material_id?.isCorrect ? (
+                <CheckCircleIcon className="h-5 w-5 text-emerald-500" />
+              ) : (
+                <XCircleIcon className="h-5 w-5 text-rose-500" />
+              )}
+            </div>
+          </div>
           <RadioGroup
             value={keycapMaterial}
             onChange={setKeycapMaterial}
             className="mt-2"
+            disabled={
+              validateAnswerMutation.isLoading ||
+              validateAnswerMutation.isSuccess
+            }
           >
             <RadioGroup.Label className="sr-only">
               Choose a keycap material
@@ -72,13 +111,17 @@ export default function Play({
                   <RadioGroup.Option
                     key={keycap_material_id}
                     value={keycap_material_id}
-                    className={({ active, checked }) =>
+                    className={({ active, checked, disabled }) =>
                       clsx(
                         active ? 'ring-2 ring-pink-500 ring-offset-2' : '',
                         checked
                           ? 'border-transparent bg-pink-600 text-white hover:bg-pink-700'
                           : 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
-                        'flex cursor-pointer items-center justify-center rounded-md border p-3 text-sm font-medium uppercase focus:outline-none sm:flex-1'
+                        disabled ? 'cursor-not-allowed' : 'cursor-pointer',
+                        gradedAnswers?.keycap_material_id?.correctAnswer ===
+                          keycap_material_id &&
+                          'ring-2 ring-emerald-500 ring-offset-2',
+                        'flex items-center justify-center rounded-md border p-3 text-sm font-medium uppercase focus:outline-none sm:flex-1'
                       )
                     }
                   >
@@ -91,11 +134,30 @@ export default function Play({
         </div>
 
         <div>
-          <h2 className="text-sm font-medium text-gray-900">PLATE MATERIAL</h2>
+          <div className="flex justify-between">
+            <h2 className="text-sm font-medium text-gray-900">
+              PLATE MATERIAL
+            </h2>
+            <div
+              className={clsx(
+                gradedAnswers?.plate_material_id ? 'inline' : 'hidden'
+              )}
+            >
+              {gradedAnswers?.plate_material_id?.isCorrect ? (
+                <CheckCircleIcon className="h-5 w-5 text-emerald-500" />
+              ) : (
+                <XCircleIcon className="h-5 w-5 text-rose-500" />
+              )}
+            </div>
+          </div>
           <RadioGroup
             value={plateMaterial}
             onChange={setPlateMaterial}
             className="mt-2"
+            disabled={
+              validateAnswerMutation.isLoading ||
+              validateAnswerMutation.isSuccess
+            }
           >
             <RadioGroup.Label className="sr-only">
               Choose a plate material
@@ -106,13 +168,17 @@ export default function Play({
                   <RadioGroup.Option
                     key={plate_material_id}
                     value={plate_material_id}
-                    className={({ active, checked }) =>
+                    className={({ active, checked, disabled }) =>
                       clsx(
                         active ? 'ring-2 ring-pink-500 ring-offset-2' : '',
                         checked
                           ? 'border-transparent bg-pink-600 text-white hover:bg-pink-700'
                           : 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
-                        'flex cursor-pointer items-center justify-center rounded-md border p-3 text-sm font-medium uppercase focus:outline-none sm:flex-1'
+                        gradedAnswers?.plate_material_id?.correctAnswer ===
+                          plate_material_id &&
+                          'ring-2 ring-emerald-500 ring-offset-2',
+                        disabled ? 'cursor-not-allowed' : 'cursor-pointer',
+                        'flex items-center justify-center rounded-md border p-3 text-sm font-medium uppercase focus:outline-none sm:flex-1'
                       )
                     }
                   >
@@ -127,8 +193,27 @@ export default function Play({
         </div>
 
         <div>
-          <h2 className="text-sm font-medium text-gray-900">KEYBOARD</h2>
-          <RadioGroup value={keyboard} onChange={setKeyboard} className="mt-2">
+          <div className="flex justify-between">
+            <h2 className="text-sm font-medium text-gray-900">KEYBOARD</h2>
+            <div
+              className={clsx(gradedAnswers?.keyboard_id ? 'inline' : 'hidden')}
+            >
+              {gradedAnswers?.keyboard_id?.isCorrect ? (
+                <CheckCircleIcon className="h-5 w-5 text-emerald-500" />
+              ) : (
+                <XCircleIcon className="h-5 w-5 text-rose-500" />
+              )}
+            </div>
+          </div>
+          <RadioGroup
+            value={keyboard}
+            onChange={setKeyboard}
+            className="mt-2"
+            disabled={
+              validateAnswerMutation.isLoading ||
+              validateAnswerMutation.isSuccess
+            }
+          >
             <RadioGroup.Label className="sr-only">
               Choose a keyboard
             </RadioGroup.Label>
@@ -138,13 +223,17 @@ export default function Play({
                   <RadioGroup.Option
                     key={keyboard_id}
                     value={keyboard_id}
-                    className={({ active, checked }) =>
+                    className={({ active, checked, disabled }) =>
                       clsx(
                         active ? 'ring-2 ring-pink-500 ring-offset-2' : '',
                         checked
                           ? 'border-transparent bg-pink-600 text-white hover:bg-pink-700'
                           : 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
-                        'flex cursor-pointer items-center justify-center rounded-md border p-3 text-sm font-medium uppercase focus:outline-none sm:flex-1'
+                        gradedAnswers?.keyboard_id?.correctAnswer ===
+                          keyboard_id &&
+                          'ring-2 ring-emerald-500 ring-offset-2',
+                        disabled ? 'cursor-not-allowed' : 'cursor-pointer',
+                        'flex items-center justify-center rounded-md border p-3 text-sm font-medium uppercase focus:outline-none sm:flex-1'
                       )
                     }
                   >
@@ -159,11 +248,28 @@ export default function Play({
         </div>
 
         <div>
-          <h2 className="text-sm font-medium text-gray-900">KEYSWITCH</h2>
+          <div className="flex justify-between">
+            <h2 className="text-sm font-medium text-gray-900">KEYSWITCH</h2>
+            <div
+              className={clsx(
+                gradedAnswers?.keyswitch_id ? 'inline' : 'hidden'
+              )}
+            >
+              {gradedAnswers?.keyswitch_id?.isCorrect ? (
+                <CheckCircleIcon className="h-5 w-5 text-emerald-500" />
+              ) : (
+                <XCircleIcon className="h-5 w-5 text-rose-500" />
+              )}
+            </div>
+          </div>
           <RadioGroup
             value={keyswitch}
             onChange={setKeyswitch}
             className="mt-2"
+            disabled={
+              validateAnswerMutation.isLoading ||
+              validateAnswerMutation.isSuccess
+            }
           >
             <RadioGroup.Label className="sr-only">
               Choose a keyswitch
@@ -177,7 +283,7 @@ export default function Play({
                   <RadioGroup.Option
                     key={keyswitch_id}
                     value={keyswitch_id}
-                    className={({ checked }) =>
+                    className={({ checked, disabled }) =>
                       clsx(
                         idx === 0 ? 'rounded-t-md' : '',
                         idx === soundTest.options.keyswitch.length - 1
@@ -186,7 +292,8 @@ export default function Play({
                         checked
                           ? 'z-10 border-pink-200 bg-pink-50'
                           : 'border-gray-200',
-                        'relative flex cursor-pointer flex-col border p-4 focus:outline-none md:grid md:grid-cols-2 md:pl-4 md:pr-6'
+                        disabled ? 'cursor-not-allowed' : 'cursor-pointer',
+                        'relative flex flex-col border p-4 focus:outline-none md:grid md:grid-cols-2 md:pl-4 md:pr-6'
                       )
                     }
                   >
@@ -201,6 +308,9 @@ export default function Play({
                               active
                                 ? 'ring-2 ring-pink-500 ring-offset-2'
                                 : '',
+                              gradedAnswers?.keyswitch_id?.correctAnswer ===
+                                keyswitch_id &&
+                                'ring-2 ring-emerald-500 ring-offset-2',
                               'flex h-4 w-4 items-center justify-center rounded-full border'
                             )}
                             aria-hidden="true"
@@ -237,15 +347,18 @@ export default function Play({
         <div className="border-t border-gray-200 pt-5">
           <div className="flex justify-end">
             <button
-              type="button"
-              className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-pink-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
-              onClick={handleSave}
+              type="submit"
+              className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-pink-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-600"
+              disabled={
+                validateAnswerMutation.isLoading ||
+                validateAnswerMutation.isSuccess
+              }
             >
               Save
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </Container>
   )
 }
