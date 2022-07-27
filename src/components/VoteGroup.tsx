@@ -54,37 +54,39 @@ export default function VoteGroup({
   }
 
   return (
-    <span className="relative z-0 flex flex-col rounded-md shadow-sm">
-      <button
-        type="button"
-        className={clsx(
-          'relative inline-flex items-center rounded-t-md border border-gray-300 bg-white p-2 text-sm font-medium focus:z-10 focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500',
-          vote === VOTE_TYPES.Upvote
-            ? VARIANTS[VOTE_TYPES.Upvote]
-            : VARIANTS[VOTE_TYPES.Default]
-        )}
-        onClick={handleUpvote}
-      >
-        <span className="sr-only">
-          {vote === VOTE_TYPES.Upvote ? 'remove upvote' : 'add upvote'}
-        </span>
-        <ChevronUpIcon className="h-5 w-5" aria-hidden="true" />
-      </button>
-      <button
-        type="button"
-        className={clsx(
-          'relative -mt-px inline-flex items-center rounded-b-md border border-gray-300 bg-white p-2 text-sm font-medium focus:z-10 focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500',
-          vote === VOTE_TYPES.Downvote
-            ? VARIANTS[VOTE_TYPES.Downvote]
-            : VARIANTS[VOTE_TYPES.Default]
-        )}
-        onClick={handleDownvote}
-      >
-        <span className="sr-only">
-          {vote === VOTE_TYPES.Downvote ? 'remove downvote' : 'add downvote'}
-        </span>
-        <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
-      </button>
-    </span>
+    <div>
+      <span className="relative z-0 flex flex-col rounded-md shadow-sm">
+        <button
+          type="button"
+          className={clsx(
+            'relative inline-flex items-center rounded-t-md border border-gray-300 bg-white p-2 text-sm font-medium focus:z-10 focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500',
+            vote === VOTE_TYPES.Upvote
+              ? VARIANTS[VOTE_TYPES.Upvote]
+              : VARIANTS[VOTE_TYPES.Default]
+          )}
+          onClick={handleUpvote}
+        >
+          <span className="sr-only">
+            {vote === VOTE_TYPES.Upvote ? 'remove upvote' : 'add upvote'}
+          </span>
+          <ChevronUpIcon className="h-5 w-5" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          className={clsx(
+            'relative -mt-px inline-flex items-center rounded-b-md border border-gray-300 bg-white p-2 text-sm font-medium focus:z-10 focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500',
+            vote === VOTE_TYPES.Downvote
+              ? VARIANTS[VOTE_TYPES.Downvote]
+              : VARIANTS[VOTE_TYPES.Default]
+          )}
+          onClick={handleDownvote}
+        >
+          <span className="sr-only">
+            {vote === VOTE_TYPES.Downvote ? 'remove downvote' : 'add downvote'}
+          </span>
+          <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+        </button>
+      </span>
+    </div>
   )
 }
