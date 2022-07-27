@@ -1,7 +1,9 @@
 import { supabaseClient } from '@supabase/auth-helpers-nextjs'
+import toast from 'react-hot-toast'
 import { useMutation } from 'react-query'
 
 import { UserInfo } from '@/types'
+import { isSupabaseError } from '@/utils'
 
 async function signUp({ email, password }: UserInfo) {
   const { user, error: signUpError } = await supabaseClient.auth.signUp({
@@ -16,5 +18,11 @@ async function signUp({ email, password }: UserInfo) {
 }
 
 export default function useSignUp(userInfo: UserInfo) {
-  return useMutation(() => signUp(userInfo))
+  return useMutation(() => signUp(userInfo), {
+    onError(error) {
+      if (isSupabaseError(error)) {
+        toast.error(error.message)
+      }
+    }
+  })
 }

@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
+import toast from 'react-hot-toast'
 
 import Header from '@/components/auth/Header'
 import LoginForm from '@/components/auth/LoginForm'
@@ -22,6 +23,11 @@ export default function Signup() {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+
+    if (!email || !password) {
+      return toast.error('sign up error: missing required information')
+    }
+
     signUpMutation.mutate()
   }
 
