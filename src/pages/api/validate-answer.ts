@@ -2,7 +2,6 @@ import {
   supabaseServerClient,
   withApiAuth
 } from '@supabase/auth-helpers-nextjs'
-import invariant from 'tiny-invariant'
 
 import {
   CheckAnswer,
@@ -21,19 +20,14 @@ export default withApiAuth(async function ValidateAnswer(req, res) {
   const { keycapMaterial, plateMaterial, keyboard, keyswitch } = req.body
 
   try {
-    invariant(
-      typeof keycapMaterial === 'string',
-      'expected keycapMaterial to be a string'
-    )
-    invariant(
-      typeof plateMaterial === 'string',
-      'expected plateMaterial to be a string'
-    )
-    invariant(typeof keyboard === 'string', 'expected keyboard to be a string')
-    invariant(
-      typeof keyswitch === 'string',
-      'expected keyswitch to be a string'
-    )
+    if (typeof keycapMaterial === 'string')
+      throw new Error('expected keycapMaterial to be a string')
+    if (typeof plateMaterial === 'string')
+      throw new Error('expected plateMaterial to be a string')
+    if (typeof keyboard === 'string')
+      throw new Error('expected keyboard to be a string')
+    if (typeof keyswitch === 'string')
+      throw new Error('expected keyswitch to be a string')
   } catch (err) {
     if (err instanceof Error) {
       return res.status(400).json({ status: 400, error: err.message })
