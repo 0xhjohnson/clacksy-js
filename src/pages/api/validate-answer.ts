@@ -1,11 +1,10 @@
-import {
-  supabaseServerClient,
-  withApiAuth
-} from '@supabase/auth-helpers-nextjs'
+import { supabaseServerClient } from '@supabase/auth-helpers-nextjs'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 import {
   CheckAnswer,
   PrivateSoundTestInfo,
+  ValidateAnswerErrorResponse,
   ValidateAnswerResponse
 } from '@/types'
 
@@ -16,7 +15,10 @@ function checkAnswer(correctAnswer: string, guess: string): CheckAnswer {
   }
 }
 
-export default withApiAuth(async function ValidateAnswer(req, res) {
+export default async function ValidateAnswer(
+  req: NextApiRequest,
+  res: NextApiResponse<ValidateAnswerResponse | ValidateAnswerErrorResponse>
+) {
   const { keycapMaterial, plateMaterial, keyboard, keyswitch } = req.body
 
   try {
@@ -102,4 +104,4 @@ export default withApiAuth(async function ValidateAnswer(req, res) {
   )
 
   res.json(grades)
-})
+}

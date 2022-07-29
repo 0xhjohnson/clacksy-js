@@ -168,3 +168,8 @@ export type ValidateAnswerResponse = {
   keyswitch_id: CheckAnswer | null
   totalPoints: number
 }
+
+export type ValidateAnswerErrorResponse = {
+  status: number
+  error: string
+}
