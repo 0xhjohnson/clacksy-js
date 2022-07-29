@@ -20,13 +20,13 @@ export default withApiAuth(async function ValidateAnswer(req, res) {
   const { keycapMaterial, plateMaterial, keyboard, keyswitch } = req.body
 
   try {
-    if (typeof keycapMaterial === 'string')
+    if (typeof keycapMaterial !== 'string')
       throw new Error('expected keycapMaterial to be a string')
-    if (typeof plateMaterial === 'string')
+    if (typeof plateMaterial !== 'string')
       throw new Error('expected plateMaterial to be a string')
-    if (typeof keyboard === 'string')
+    if (typeof keyboard !== 'string')
       throw new Error('expected keyboard to be a string')
-    if (typeof keyswitch === 'string')
+    if (typeof keyswitch !== 'string')
       throw new Error('expected keyswitch to be a string')
   } catch (err) {
     if (err instanceof Error) {
